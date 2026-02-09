@@ -1,0 +1,164 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #1a1a1a;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2a2a2a;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.header h1 {
+  color: #38bdf8;
+  font-size: 22px;
+}
+
+.header button {
+  background-color: #dc2626;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.actions {
+  margin-bottom: 15px;
+}
+
+.actions button {
+  background-color: #f59e0b;
+  color: #1a1a1a;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.users {
+  background-color: #2a2a2a;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.typing {
+  background-color: #2a2a2a;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  color: #38bdf8;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.messages {
+  background-color: #2a2a2a;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.messages ul {
+  list-style: none;
+}
+
+.message {
+  margin-bottom: 12px;
+  max-width: 70%;
+}
+
+.message.me {
+  margin-left: auto;
+  text-align: right;
+}
+
+.message.other {
+  margin-right: auto;
+}
+
+.author {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.message.me .author {
+  color: #22c55e;
+}
+
+.message.other .author {
+  color: #38bdf8;
+}
+
+.content {
+  background-color: #374151;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.message.me .content {
+  border-right: 3px solid #22c55e;
+}
+
+.message.other .content {
+  border-left: 3px solid #38bdf8;
+}
+
+.system {
+  background-color: #1f2933;
+  color: #9ca3af;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  background-color: #2a2a2a;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+form input {
+  flex: 1;
+  padding: 10px;
+  background-color: #1a1a1a;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  color: white;
+}
+
+form button {
+  background-color: #10b981;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
