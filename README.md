@@ -1,70 +1,158 @@
-# Projet RTC
+# ChatFlow
 
-Le but de ce projet était de découvrir et mettre en place une application de **communication en temps réel (RTC)**, en combinant une **API backend**, une **base de données PostgreSQL**, et un **front-end moderne**, tout en respectant une architecture claire et modulaire.
+**ChatFlow** est une plateforme de messagerie instantanée en temps réel inspirée de Discord.
+Elle permet aux utilisateurs de créer des serveurs, d'organiser des discussions par salons (*channels*)
+et d'échanger des messages instantanément grâce à une architecture robuste basée sur les WebSockets.
 
-Le projet permet :
-- l’authentification des utilisateurs via **JWT**
-- la récupération des informations utilisateurs depuis **PostgreSQL**
-- la communication en temps réel avec **Socket.IO**
-- la gestion de **rooms via socket.io**
-- l’affichage du **nom de l’expéditeur** pour chaque message
-- une séparation claire entre **front**, **back** et **db**
+Ce projet met en œuvre une architecture complète séparant le **Frontend**, le **Backend** et la **Base de données**,
+tout en intégrant des technologies modernes de communication temps réel (RTC).
 
+---
 
-## Technologies utilisées
+## Fonctionnalités
 
-- [HTML5](https://www.w3schools.com/html/default.asp)
-- [CSS3](https://www.w3schools.com/css/default.asp)
-- [Node.js](https://www.w3schools.com/nodejs/)
-- [Express.js](https://expressjs.com/)
-- [Socket.IO](https://socket.io/docs/v4/)
-- [PostgreSQL](https://www.postgresql.org/docs/)
-- [PGAdmin4](https://www.pgadmin.org/docs/)
-- [JWT (JSON Web Token)](https://jwt.io/introduction)
-- [Docker](https://www.w3schools.in/docker/intro)
-- [Next.js](https://nextjs.org/docs)
+### Authentification & Utilisateurs
 
+- **Inscription et Connexion** : système sécurisé avec hachage des mots de passe via Bcrypt.
+- **Sécurité JWT** : utilisation de JSON Web Tokens pour sécuriser les sessions et les échanges API.
+- **Persistance des données** : stockage des utilisateurs dans PostgreSQL.
 
-## Fonctionnalités principales
+---
 
-- Authentification utilisateur (JWT)
-- Connexion sécurisée des sockets via token
-- Création et gestion de rooms Socket.IO
-- Envoi de messages ciblés par room
-- Affichage du nom  de l’utilisateur connecté
-- Architecture prête pour la création de “serveurs” (style Discord)
-- Communication temps réel sans rechargement de page
+### Gestion des Serveurs
 
+- Création de serveurs.
+- Système d'invitation avec génération de codes uniques.
+- Gestion des membres : rejoindre, quitter ou supprimer un serveur.
 
-## Architecture du projet
+---
 
-- **Front-end** : Next.js (port 3000)
-- **Back-end** : Express + Socket.IO (port 3001)
-- **Base de données** : PostgreSQL
-- **Admin DB** : PGAdmin
+### Communication Temps Réel
 
+- **Salons multiples** : création et suppression de channels textuels.
+- **Messagerie instantanée** via Socket.IO.
+- **Notifications système** lors de l'arrivée ou du départ d'un utilisateur.
+- **Indicateur de frappe** (*"Augustin est en train d'écrire…"*).
+- **Liste des connectés** en temps réel.
 
-## Déploiement
+---
 
-À la racine du projet :
+## Stack Technique
 
-docker compose down -v
+### Frontend
 
+| Élément          | Technologie            |
+|------------------|------------------------|
+| Framework        | Next.js 16 (App Router)|
+| Langage          | TypeScript             |
+| Style            | Tailwind CSS           |
+| WebSocket Client | socket.io-client       |
+
+### Backend
+
+| Élément          | Technologie            |
+|------------------|------------------------|
+| Runtime          | Node.js                |
+| Framework        | Express.js             |
+| Temps réel       | Socket.IO              |
+| Authentification | jsonwebtoken (JWT)     |
+| Hashing          | bcrypt                 |
+
+### Data & DevOps
+
+| Élément           | Technologie         |
+|-------------------|---------------------|
+| Base de données   | PostgreSQL 16       |
+| Administration    | PGAdmin 4           |
+| Conteneurisation  | Docker & Compose    |
+
+---
+
+## Architecture du Projet
+
+```
+/
+├── back/        → API REST + serveur Socket.IO
+├── front/       → Interface utilisateur Next.js
+└── DataBase/    → Scripts SQL d'initialisation
+```
+
+---
+
+## Installation & Déploiement
+
+### Prérequis
+
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+---
+
+### Démarrage rapide
+
+**1. Cloner le projet**
+
+```bash
+git clone https://github.com/LaFicelleCmoi/RTC-Projet.git
+cd RTC-Projet
+```
+
+**2. Lancer les conteneurs**
+
+```bash
 docker compose up --build -d
+```
 
+**3. Vérifier les logs**
+
+```bash
 docker compose logs -f back
+```
 
+**4. Arrêter les services**
 
-## Acccès aux services
+```bash
+docker compose down -v
+```
 
-Front-end (application): http://localhost:3000
+---
 
-Back-end (API + Socket.IO): http://localhost:3001
+## Accès aux Services
 
-PGAdmin (administration DB): http://localhost:5050
+| Service      | URL                    |
+|--------------|------------------------|
+| Frontend     | http://localhost:3000  |
+| Backend API  | http://localhost:3001  |
+| PGAdmin      | http://localhost:5050  |
+
+> Pour PGAdmin :
+> - **Email** : voir la variable `PGADMIN_EMAIL` dans `.env`
+> - **Password** : voir la variable `PGADMIN_PASSWORD` dans `.env`
+
+---
+
+## Modèle de Données
+
+La base relationnelle s'organise autour de 4 tables principales :
+
+| Table           | Description                                                       |
+|-----------------|-------------------------------------------------------------------|
+| `users`         | Stocke les informations de connexion (nom, email, mot de passe haché). |
+| `servers`       | Informations des serveurs (nom, propriétaire, code d'invitation). |
+| `users_servers` | Table de liaison entre utilisateurs et serveurs.                  |
+| `channels`      | Salons de discussion associés à un serveur.                       |
+
+---
 
 ## Auteurs
-[Viemont_Augustin](https://github.com/Augustin734)
-[Perles_Olysse](https://github.com/S6leak)
-[Viscione_Clyde](https://github.com/ClydeViscione)
-[Clerc_Lois](https://github.com/LaFicelleCmoi)
+
+- **Viemont Augustin** Lien GitHub : https://github.com/Augustin734
+- **Perles Olysse**    Lien GitHub : https://github.com/S6leak
+- **Viscione Clyde**   Lien GitHub : https://github.com/ClydeViscione
+- **Clerc Lois**
+
+---
+
+## Dépôt GitHub
+
+[https://github.com/LaFicelleCmoi/RTC-Projet](https://github.com/LaFicelleCmoi/RTC-Projet)
