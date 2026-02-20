@@ -146,9 +146,9 @@ La base relationnelle s'organise autour de 4 tables principales :
 
 ## Auteurs
 
-- **Viemont Augustin** Lien GitHub : https://github.com/Augustin734
-- **Perles Olysse**    Lien GitHub : https://github.com/S6leak
-- **Viscione Clyde**   Lien GitHub : https://github.com/ClydeViscione
+- **Viemont Augustin** [Lien GitHub](https://github.com/Augustin734)
+- **Perles Olysse**    [Lien GitHub](https://github.com/S6leak)
+- **Viscione Clyde**   [Lien GitHub](https://github.com/ClydeViscione)
 - **Clerc Lois**
 
 ---
